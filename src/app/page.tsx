@@ -1,18 +1,19 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Hero from '@/components/sections/Hero'
+import WhoWeAre from '@/components/sections/WhoWeAre'
 import ServicesPreview from '@/components/sections/ServicesPreview'
-import PortfolioPreview from '@/components/sections/PortfolioPreview'
+import SkillsSection from '@/components/sections/SkillsSection'
 import Testimonials from '@/components/sections/Testimonials'
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="relative">
       <Hero />
       <ServicesPreview />
-      <PortfolioPreview />
       <Testimonials />
+      <WhoWeAre />
+      <SkillsSection />
     </div>
   )
 }

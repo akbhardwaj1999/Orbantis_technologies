@@ -3,6 +3,7 @@ import { Poppins, Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import ConditionalLetsTalk from '@/components/ConditionalLetsTalk'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -49,10 +50,13 @@ export default function RootLayout({
     <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
       <body className={`${inter.className} antialiased`}>
         <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        <div className="relative">
+          <main className="min-h-screen relative z-20">
+            {children}
+          </main>
+          <ConditionalLetsTalk />
+          <Footer />
+        </div>
       </body>
     </html>
   )

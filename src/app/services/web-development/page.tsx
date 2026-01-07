@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Code, CheckCircle, ArrowRight, Star, Clock, Users, Shield, Zap } from 'lucide-react'
 import Link from 'next/link'
+import CountUp from '@/components/CountUp'
 
 export default function WebDevelopment() {
   const features = [
@@ -67,7 +68,7 @@ export default function WebDevelopment() {
   ]
 
   const stats = [
-    { number: '50+', label: 'Projects Completed', icon: Code },
+    { number: '10+', label: 'Projects Completed', icon: Code },
     { number: '98%', label: 'Client Satisfaction', icon: Star },
     { number: '24/7', label: 'Support Available', icon: Clock },
     { number: '100%', label: 'On-Time Delivery', icon: Shield }
@@ -137,7 +138,7 @@ export default function WebDevelopment() {
                 <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <stat.icon className="w-8 h-8 text-white" />
                 </div>
-                <div className="text-3xl lg:text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
+                <CountUp end={stat.number} className="text-3xl lg:text-4xl font-bold text-blue-600 mb-2" />
                 <div className="text-gray-600 font-medium">{stat.label}</div>
               </motion.div>
             ))}
@@ -296,40 +297,6 @@ export default function WebDevelopment() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-cyan-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-poppins font-bold text-white mb-6">
-              Ready to Build Your <span className="bg-gradient-to-r from-cyan-400 to-white bg-clip-text text-transparent">Dream Website?</span>
-            </h2>
-            <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Let's discuss your project requirements and create a web solution that drives 
-              your business forward with cutting-edge technology.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="inline-flex items-center bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105"
-              >
-                <span>Start Your Project</span>
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-              <Link
-                href="tel:+919805871945"
-                className="inline-flex items-center border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300"
-              >
-                <span>Call 9805871945</span>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   )
 }

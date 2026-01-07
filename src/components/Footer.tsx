@@ -3,8 +3,10 @@
 import Link from 'next/link'
 import { Mail, Phone, MapPin, Linkedin, MessageCircle, Github } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useRef } from 'react'
 
 const Footer = () => {
+  const footerRef = useRef<HTMLElement>(null)
   const currentYear = new Date().getFullYear()
 
   const footerLinks = {
@@ -35,7 +37,7 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="bg-navy text-white">
+    <footer ref={footerRef} className="relative bg-light-200 text-gray-900 border-t border-gray-300 z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -52,22 +54,24 @@ const Footer = () => {
                 className="h-10 object-contain rounded-lg"
               />
             </div>
-            <p className="text-gray-300 mb-6 mt-6 leading-relaxed">
+            <p className="text-gray-600 mb-6 mt-6 leading-relaxed">
               Leading the digital transformation with cutting-edge technology solutions. 
               We build the future, one innovation at a time.
             </p>
             <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-gray-300">
-                <Mail className="w-4 h-4 text-aqua" />
-                <span className="text-sm">info@orbantistechnologies.com</span>
+              <div className="flex items-center space-x-3 text-gray-600">
+                <Mail className="w-4 h-4 text-accent-blue" />
+                <a href="mailto:info@orbantistechnologies.com" className="text-sm hover:text-accent-blue transition-colors">info@orbantistechnologies.com</a>
               </div>
-              <div className="flex items-center space-x-3 text-gray-300">
-                <Phone className="w-4 h-4 text-aqua" />
-                <span className="text-sm">9805871945</span>
+              <div className="flex items-center space-x-3 text-gray-600">
+                <Phone className="w-4 h-4 text-accent-cyan" />
+                <a href="tel:+919805871945" className="text-sm hover:text-accent-cyan transition-colors">9805871945</a>
               </div>
-              <div className="flex items-center space-x-3 text-gray-300">
-                <MapPin className="w-4 h-4 text-aqua" />
-                <span className="text-sm">Global Remote Team</span>
+              <div className="flex items-start space-x-3 text-gray-600">
+                <MapPin className="w-4 h-4 text-accent-magenta mt-1" />
+                <div className="text-sm">
+                  Locality: Ghumarwin, District: Bilaspur, State: Himachal Pradesh
+                </div>
               </div>
             </div>
           </motion.div>
@@ -78,13 +82,13 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h3 className="font-poppins font-semibold text-lg mb-4">Company</h3>
+            <h3 className="font-poppins font-semibold text-lg mb-4 text-gray-900">Company</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-aqua transition-colors duration-300"
+                    className="text-gray-600 hover:text-accent-blue transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -99,13 +103,13 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="font-poppins font-semibold text-lg mb-4">Services</h3>
+            <h3 className="font-poppins font-semibold text-lg mb-4 text-gray-900">Services</h3>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-aqua transition-colors duration-300"
+                    className="text-gray-600 hover:text-accent-blue transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -120,13 +124,13 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h3 className="font-poppins font-semibold text-lg mb-4">Resources</h3>
+            <h3 className="font-poppins font-semibold text-lg mb-4 text-gray-900">Resources</h3>
             <ul className="space-y-3 mb-6">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-aqua transition-colors duration-300"
+                    className="text-gray-600 hover:text-accent-blue transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -134,7 +138,7 @@ const Footer = () => {
               ))}
             </ul>
             
-            <h4 className="font-poppins font-semibold text-base mb-4">Follow Us</h4>
+            <h4 className="font-poppins font-semibold text-base mb-4 text-gray-900">Follow Us</h4>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
                 <a
@@ -142,9 +146,9 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-aqua transition-colors duration-300 group"
+                  className="w-10 h-10 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:bg-accent-blue hover:border-accent-blue transition-colors duration-300 group shadow-sm"
                 >
-                  <social.icon className="w-5 h-5 text-gray-300 group-hover:text-white" />
+                  <social.icon className="w-5 h-5 text-gray-600 group-hover:text-white" />
                 </a>
               ))}
             </div>
@@ -156,17 +160,17 @@ const Footer = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="border-t border-gray-800 mt-12 pt-8"
+          className="border-t border-gray-300 mt-12 pt-8"
         >
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-600 text-sm">
               © {currentYear} Orbantis Technologies. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="/privacy" className="text-gray-400 hover:text-aqua text-sm transition-colors">
+            <div className="flex space-x-6">
+              <Link href="/privacy" className="text-gray-600 hover:text-accent-blue text-sm transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-aqua text-sm transition-colors">
+              <Link href="/terms" className="text-gray-600 hover:text-accent-blue text-sm transition-colors">
                 Terms of Service
               </Link>
             </div>

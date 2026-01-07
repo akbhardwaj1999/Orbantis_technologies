@@ -1,223 +1,304 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Play, CheckCircle } from 'lucide-react'
+import { ArrowRight, Play } from 'lucide-react'
+import CountUp from '@/components/CountUp'
+import { useRef, useState, useEffect } from 'react'
 
-const Hero = () => {
-  const features = [
-    'Free Consultation',
-    '24/7 Support',
-    'Modern Technology',
-    'Scalable Solutions'
-  ]
+// Typing Text Card Component
+const TypingTextCard = () => {
+  const [displayedText, setDisplayedText] = useState('')
+  const fixedText = "Fresh ideas,"
+  const typingText = " modern technology, and a commitment to quality"
+  const typingRef = useRef<{ currentIndex: number; timeoutId: NodeJS.Timeout | null; isActive: boolean }>({
+    currentIndex: 0,
+    timeoutId: null,
+    isActive: false
+  })
+
+  useEffect(() => {
+    // Clear any existing timeout
+    if (typingRef.current.timeoutId) {
+      clearTimeout(typingRef.current.timeoutId)
+    }
+    
+    // Reset state
+    typingRef.current.currentIndex = 0
+    typingRef.current.isActive = true
+    setDisplayedText('')
+    
+    const typeNext = () => {
+      if (!typingRef.current.isActive) return
+      
+      if (typingRef.current.currentIndex < typingText.length) {
+        setDisplayedText(typingText.slice(0, typingRef.current.currentIndex + 1))
+        typingRef.current.currentIndex++
+        typingRef.current.timeoutId = setTimeout(typeNext, 100)
+      } else {
+        // Wait a bit, then restart
+        typingRef.current.timeoutId = setTimeout(() => {
+          if (typingRef.current.isActive) {
+            typingRef.current.currentIndex = 0
+            setDisplayedText('')
+            typeNext()
+          }
+        }, 3000)
+      }
+    }
+    
+    typeNext()
+
+    return () => {
+      typingRef.current.isActive = false
+      if (typingRef.current.timeoutId) {
+        clearTimeout(typingRef.current.timeoutId)
+      }
+    }
+  }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0 w-full h-full">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="/home.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        {/* Overlay for better text visibility */}
-        <div className="absolute inset-0 bg-navy/70"></div>
-      </div>
-      
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-aqua/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/5 rounded-full blur-2xl"></div>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="text-center lg:text-left"
-          >
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-poppins font-bold text-white leading-tight mb-6"
-            >
-              Transform Your Business
-              <span className="block bg-gradient-to-r from-aqua to-primary-500 bg-clip-text text-transparent">
-                With Technology
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl"
-            >
-              We specialize in React & Django development, Shopify stores, WordPress sites, Laravel applications, 
-              mobile apps, AI chatbots, machine learning models, SQL databases, ETL processes, HRMS systems, 
-              SEO optimization, and Figma designs. Let us help you grow your business with cutting-edge technology.
-            </motion.p>
-
-            {/* Features */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid grid-cols-2 gap-4 mb-8"
-            >
-              {features.map((feature, index) => (
-                <motion.div 
-                  key={feature} 
-                  className="flex items-center space-x-2 group"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <CheckCircle className="w-5 h-5 text-aqua flex-shrink-0 group-hover:text-primary-400 transition-colors" />
-                  <span className="text-gray-300 group-hover:text-white transition-colors">{feature}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <Link
-                href="/contact"
-                className="group bg-gradient-to-r from-aqua to-primary-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2"
-              >
-                <span>Get Free Quote</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              
-              <button className="group bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center space-x-2">
-                <Play className="w-5 h-5" />
-                <span>Watch Demo</span>
-              </button>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-white/20"
-            >
-              <div className="text-center">
-                <div className="text-3xl font-bold text-aqua mb-1">New</div>
-                <div className="text-gray-300 text-sm">Fresh Start</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-aqua mb-1">100%</div>
-                <div className="text-gray-300 text-sm">Dedication</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-aqua mb-1">24/7</div>
-                <div className="text-gray-300 text-sm">Support Available</div>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Content - Hero Image/Animation */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="relative"
-          >
-            <div className="relative w-full h-96 lg:h-[500px]">
-              {/* Floating Cards */}
-              <motion.div
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute top-0 left-0 w-64 h-40 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6"
-              >
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-8 h-8 bg-aqua rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">W</span>
-                  </div>
-                  <span className="text-white font-semibold">Web Development</span>
-                </div>
-                <p className="text-gray-300 text-sm">React, Next.js, Django</p>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, 20, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute top-20 right-0 w-64 h-40 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6"
-              >
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">M</span>
-                  </div>
-                  <span className="text-white font-semibold">Mobile Apps</span>
-                </div>
-                <p className="text-gray-300 text-sm">React Native, Flutter</p>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 h-40 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-6"
-              >
-                <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">AI</span>
-                  </div>
-                  <span className="text-white font-semibold">AI & Automation</span>
-                </div>
-                <p className="text-gray-300 text-sm">Chatbots, RAG, ML</p>
-              </motion.div>
-
-              {/* Central Orb */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-aqua/30 rounded-full"
-              >
-                <motion.div
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-gradient-to-r from-aqua to-primary-500 rounded-full"
-                ></motion.div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+    <motion.div
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+      className="w-full"
+    >
+      {/* Description with attractive styling - Fixed part + typing part */}
+      <p 
+        style={{
+          textAlign: 'left',
+          fontSize: '18px',
+          lineHeight: '1.44',
+          fontWeight: 400,
+          marginTop: '12px',
+          color: '#555',
+          fontFamily: 'Poppins, sans-serif'
+        }}
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-3 bg-white rounded-full mt-2"
-          ></motion.div>
-        </motion.div>
+        <span className="text-accent-blue font-bold">{fixedText}</span>
+        <span className="text-gray-700">
+          {displayedText}
+          {displayedText.length < typingText.length && (
+            <span className="animate-pulse ml-1 text-accent-blue">|</span>
+          )}
+        </span>
+      </p>
+    </motion.div>
+  )
+}
+
+const Hero = () => {
+  const sectionRef = useRef<HTMLElement>(null)
+  const [displayedText, setDisplayedText] = useState('')
+  const [showCursor, setShowCursor] = useState(true)
+  const typingRef = useRef<{ currentIndex: number; timeoutId: NodeJS.Timeout | null; isActive: boolean }>({
+    currentIndex: 0,
+    timeoutId: null,
+    isActive: false
+  })
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start']
+  })
+
+  // Parallax transforms
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+
+  // No content switching - show all content directly
+
+  const stats = [
+    { number: '100+', label: 'Happy Clients' },
+    { number: '98%', label: 'Client Satisfaction' },
+    { number: '24/7', label: 'Support Available' },
+  ]
+
+  const typingText = "Business"
+  
+  // Typing cursor effect
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev)
+    }, 530)
+    return () => clearInterval(cursorInterval)
+  }, [])
+
+  // Typing animation for "Business" - fixed glitch with useRef
+  useEffect(() => {
+    // Clear any existing timeout
+    if (typingRef.current.timeoutId) {
+      clearTimeout(typingRef.current.timeoutId)
+    }
+    
+    // Reset state
+    typingRef.current.currentIndex = 0
+    typingRef.current.isActive = true
+    setDisplayedText('')
+    
+    const typeNext = () => {
+      if (!typingRef.current.isActive) return
+      
+      if (typingRef.current.currentIndex < typingText.length) {
+        setDisplayedText(typingText.slice(0, typingRef.current.currentIndex + 1))
+        typingRef.current.currentIndex++
+        typingRef.current.timeoutId = setTimeout(typeNext, 150)
+      } else {
+        // Wait a bit, then restart
+        typingRef.current.timeoutId = setTimeout(() => {
+          if (typingRef.current.isActive) {
+            typingRef.current.currentIndex = 0
+            setDisplayedText('')
+            typeNext()
+          }
+        }, 2000)
+      }
+    }
+    
+    typeNext()
+
+    return () => {
+      typingRef.current.isActive = false
+      if (typingRef.current.timeoutId) {
+        clearTimeout(typingRef.current.timeoutId)
+      }
+    }
+  }, [typingText])
+
+  return (
+    <section 
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
+      {/* Image Background with subtle floating effect */}
+      <motion.div 
+        className="absolute inset-0 w-full h-full z-0"
+        style={{ y }}
+      >
+        <motion.img
+          src="/1d19d578-7d3a-454b-9ce3-2dae3fd63c7b.jpg"
+          alt="Background"
+          className="w-full h-full object-cover"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+          animate={{ 
+            y: [0, -10, 0],
+          }}
+          transition={{ 
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          onError={(e) => {
+            console.error('❌ Background image not found')
+            e.currentTarget.style.display = 'none'
+          }}
+        />
+      </motion.div>
+      
+      {/* Content - Two Column Layout */}
+      <motion.div 
+        className="relative z-10 w-full h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
+        style={{ opacity }}
+      >
+        <div className="max-w-7xl w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Text Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="space-y-6"
+            >
+              {/* Heading with typing Business - Clean rewrite */}
+              <h1 className="heading-title leading-tight">
+                <motion.span 
+                  className="block mb-2 text-gray-900"
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  Revolutionizing Your
+                </motion.span>
+                <motion.span 
+                  className="block text-accent-blue font-bold"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {displayedText}
+                  {showCursor && displayedText.length < typingText.length && (
+                    <span className="animate-pulse ml-1 text-accent-blue">|</span>
+                  )}
+                </motion.span>
+                <motion.span 
+                  className="block bg-gradient-to-r from-accent-blue via-accent-cyan to-accent-blue bg-clip-text text-transparent"
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  With Technology
+                </motion.span>
+              </h1>
+
+              {/* Description Text with typing */}
+              <TypingTextCard />
+              
+              {/* Stats Section - Left aligned, no gap */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8"
+              >
+                {stats.map((stat, index) => (
+                  <div
+                    key={stat.label}
+                    className="text-left"
+                  >
+                    <CountUp 
+                      end={stat.number} 
+                      className="text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-blue mb-1 block" 
+                    />
+                    <div className="text-gray-700 text-sm sm:text-base font-medium">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right Side - Floating Image (Bigger) */}
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+              className="flex items-center justify-center"
+            >
+              <motion.img
+                src="/banner-image-04.png"
+                alt="Banner Illustration"
+                className="w-full h-auto max-w-md lg:max-w-lg object-contain"
+                animate={{ 
+                  y: [0, -20, 0],
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                onError={(e) => {
+                  console.error('❌ Banner image not found')
+                  e.currentTarget.style.display = 'none'
+                }}
+              />
+            </motion.div>
+          </div>
+        </div>
       </motion.div>
     </section>
   )

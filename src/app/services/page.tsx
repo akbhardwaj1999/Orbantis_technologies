@@ -180,7 +180,7 @@ export default function Services() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-4xl lg:text-6xl font-poppins font-bold text-white mb-6">
+            <h1 className="heading-title text-white mb-6">
               Our <span className="bg-gradient-to-r from-aqua to-primary-400 bg-clip-text text-transparent">Services</span>
             </h1>
             <p className="text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed">
@@ -210,7 +210,7 @@ export default function Services() {
                     <service.icon className="w-8 h-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-poppins font-bold text-navy">{service.title}</h3>
+                    <h3 className="heading text-navy">{service.title}</h3>
                     <p className="text-gray-600">{service.description}</p>
                   </div>
                 </div>
@@ -267,7 +267,7 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-poppins font-bold text-navy mb-6">
+            <h2 className="heading-title text-navy mb-6">
               Our <span className="bg-gradient-to-r from-aqua to-primary-500 bg-clip-text text-transparent">Process</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -294,7 +294,7 @@ export default function Services() {
                     <div className="hidden lg:block absolute top-10 left-1/2 w-full h-0.5 bg-gradient-to-r from-aqua to-primary-500"></div>
                   )}
                 </div>
-                <h3 className="text-xl font-poppins font-semibold text-navy mb-3">
+                <h3 className="heading text-navy mb-3">
                   {step.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -316,7 +316,7 @@ export default function Services() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl lg:text-5xl font-poppins font-bold text-navy mb-6">
+              <h2 className="heading-title text-navy mb-6">
                 Why Choose <span className="bg-gradient-to-r from-aqua to-primary-500 bg-clip-text text-transparent">Orbantis?</span>
               </h2>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -330,7 +330,7 @@ export default function Services() {
                     <Star className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-poppins font-semibold text-navy mb-2">98% Client Satisfaction</h3>
+                    <h3 className="heading text-navy mb-2">98% Client Satisfaction</h3>
                     <p className="text-gray-600">Our track record speaks for itself with consistently high client satisfaction ratings.</p>
                   </div>
                 </div>
@@ -340,7 +340,7 @@ export default function Services() {
                     <CheckCircle className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-poppins font-semibold text-navy mb-2">On-Time Delivery</h3>
+                    <h3 className="heading text-navy mb-2">On-Time Delivery</h3>
                     <p className="text-gray-600">We understand the importance of deadlines and deliver projects on time, every time.</p>
                   </div>
                 </div>
@@ -350,7 +350,7 @@ export default function Services() {
                     <Brain className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-poppins font-semibold text-navy mb-2">Innovation First</h3>
+                    <h3 className="heading text-navy mb-2">Innovation First</h3>
                     <p className="text-gray-600">We stay ahead of the curve with cutting-edge technologies and innovative solutions.</p>
                   </div>
                 </div>
@@ -369,7 +369,7 @@ export default function Services() {
                   <div className="w-24 h-24 bg-gradient-to-r from-navy to-aqua rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-3xl font-bold text-white">O</span>
                   </div>
-                  <h3 className="text-2xl font-poppins font-bold text-navy mb-2">Ready to Start?</h3>
+                  <h3 className="heading text-navy mb-2">Ready to Start?</h3>
                   <p className="text-gray-600 mb-6">Let's discuss your project and create something amazing together.</p>
                   <Link
                     href="/contact"

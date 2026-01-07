@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Shield, CheckCircle, ArrowRight, Star, Clock, Users, Zap, Bug } from 'lucide-react'
 import Link from 'next/link'
+import CountUp from '@/components/CountUp'
 
 export default function TestingQA() {
   const features = [
@@ -137,7 +138,7 @@ export default function TestingQA() {
                 <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <stat.icon className="w-8 h-8 text-white" />
                 </div>
-                <div className="text-3xl lg:text-4xl font-bold text-teal-600 mb-2">{stat.number}</div>
+                <CountUp end={stat.number} className="text-3xl lg:text-4xl font-bold text-teal-600 mb-2" />
                 <div className="text-gray-600 font-medium">{stat.label}</div>
               </motion.div>
             ))}
@@ -293,41 +294,6 @@ export default function TestingQA() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-cyan-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-poppins font-bold text-white mb-6">
-              Ready to Ensure <span className="bg-gradient-to-r from-cyan-400 to-white bg-clip-text text-transparent">Quality & Reliability?</span>
-            </h2>
-            <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Let's discuss your testing requirements and create comprehensive quality assurance 
-              solutions that ensure your applications are bug-free and perform optimally.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="inline-flex items-center bg-white text-teal-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105"
-              >
-                <span>Start Your Testing Project</span>
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-              <Link
-                href="tel:+919805871945"
-                className="inline-flex items-center border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-teal-600 transition-all duration-300"
-              >
-                <span>Call 9805871945</span>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   )
 }

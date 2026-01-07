@@ -4,105 +4,109 @@ import { motion } from 'framer-motion'
 
 const Testimonials = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl lg:text-5xl font-poppins font-bold text-navy mb-6">
-            Why Choose <span className="bg-gradient-to-r from-aqua to-primary-500 bg-clip-text text-transparent">Orbantis?</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We are a new company with fresh ideas, modern technology, and a commitment to excellence. 
-            Let us prove our worth through our work.
-          </p>
-        </motion.div>
+    <section 
+      className="relative min-h-screen flex flex-col bg-light-200 overflow-hidden"
+    >
+      {/* Image Background */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <img
+          src="/simple-blue-white-background-with-text-space.jpg"
+          alt="Background"
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            console.error('❌ Background image not found')
+            e.currentTarget.style.display = 'none'
+          }}
+        />
+      </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              title: 'Fresh Perspective',
-              description: 'As a new company, we bring fresh ideas and modern approaches to every project.',
-              icon: '💡'
-            },
-            {
-              title: 'Modern Technology',
-              description: 'We use the latest technologies and frameworks to build cutting-edge solutions.',
-              icon: '🚀'
-            },
-            {
-              title: 'Personal Attention',
-              description: 'Every client gets our full attention and dedication to their project success.',
-              icon: '🎯'
-            },
-            {
-              title: 'Competitive Pricing',
-              description: 'New company rates with premium quality work and service.',
-              icon: '💰'
-            },
-            {
-              title: 'Fast Delivery',
-              description: 'Quick turnaround times without compromising on quality.',
-              icon: '⚡'
-            },
-            {
-              title: 'Future-Ready',
-              description: 'We build solutions that will grow with your business.',
-              icon: '🔮'
-            }
-          ].map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
+      {/* Content wrapper */}
+      <div className="relative z-10 flex-1 flex flex-col justify-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Section Header - Centered */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: false }}
+            className="text-center mb-8"
+          >
+            <motion.h2 
+              initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 text-center"
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: false }}
+              className="heading-title text-gray-900 mb-3"
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-poppins font-semibold text-navy mb-4">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {feature.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+              Reasons Businesses <span className="bg-gradient-to-r from-aqua to-primary-400 bg-clip-text">Trust Us</span>
+            </motion.h2>
+          </motion.div>
 
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-16 bg-gradient-to-r from-navy to-primary-600 rounded-3xl p-12 text-white"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-aqua mb-2">New</div>
-              <div className="text-gray-200">Fresh Start</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-aqua mb-2">100%</div>
-              <div className="text-gray-200">Dedication</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-aqua mb-2">24/7</div>
-              <div className="text-gray-200">Support Available</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-aqua mb-2">∞</div>
-              <div className="text-gray-200">Potential</div>
-            </div>
+          {/* Features Grid - All cards same height */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {[
+              {
+                title: 'High-Quality Solutions',
+                description: 'Scalable, secure, and performance-driven digital products.',
+                icon: '🛡️'
+              },
+              {
+                title: 'Customized Development',
+                description: 'Every solution is tailored to your business goals.',
+                icon: '⚙️'
+              },
+              {
+                title: 'Experienced Tech Experts',
+                description: 'Skilled developers, designers, and strategists with real-world experience.',
+                icon: '👥'
+              },
+              {
+                title: 'On-Time Project Delivery',
+                description: 'We meet deadlines without compromising quality.',
+                icon: '⏰'
+              },
+              {
+                title: 'End-to-End Support',
+                description: 'From planning and development to deployment and maintenance.',
+                icon: '🎧'
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: false }}
+                className="group relative h-full"
+              >
+                <motion.div
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-white/95 backdrop-blur-lg border border-white/30 rounded-2xl p-6 shadow-2xl hover:shadow-3xl transition-all duration-300 h-full flex flex-col"
+                >
+                  <div className="text-4xl mb-4">{feature.icon}</div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                    {feature.title}
+                  </h3>
+                  <p 
+                    className="flex-grow"
+                    style={{
+                      textAlign: 'left',
+                      fontSize: '18px',
+                      lineHeight: '1.44',
+                      fontWeight: 400,
+                      marginTop: '12px',
+                      color: '#555',
+                      fontFamily: 'Poppins, sans-serif'
+                    }}
+                  >
+                    {feature.description}
+                  </p>
+                </motion.div>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
