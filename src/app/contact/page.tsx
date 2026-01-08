@@ -12,6 +12,7 @@ export default function Contact() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -24,22 +25,40 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null)
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({
-        name: '',
-        email: '',
-        message: ''
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       })
-    }, 3000)
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+
+      setIsSubmitted(true)
+      
+      // Reset form after 5 seconds
+      setTimeout(() => {
+        setIsSubmitted(false)
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        })
+      }, 5000)
+    } catch (err) {
+      console.error('Form submission error:', err)
+      const errorMessage = err instanceof Error ? err.message : 'Failed to send message. Please try again.'
+      setError(errorMessage)
+      setIsSubmitting(false)
+    }
   }
 
   const supportCards = [
@@ -121,7 +140,7 @@ export default function Contact() {
                     Message Sent!
                   </h3>
                   <p className="text-gray-600">
-                    Thank you for your message. We'll get back to you within 24 hours.
+                    Thank you for your message. We've sent a confirmation email to <strong>{formData.email}</strong>. We'll get back to you within 24 hours.
                   </p>
                 </motion.div>
               ) : (
@@ -164,6 +183,18 @@ export default function Contact() {
                       placeholder="Your message"
                     />
                   </div>
+
+                  {error && (
+                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                      <p className="font-semibold mb-1">Error:</p>
+                      <p>{error}</p>
+                      {error.includes('not configured') && (
+                        <p className="mt-2 text-xs">
+                          See <code className="bg-red-100 px-1 rounded">NODEMAILER_SETUP.md</code> for setup instructions.
+                        </p>
+                      )}
+                    </div>
+                  )}
 
                   <button
                     type="submit"

@@ -77,7 +77,7 @@ export default function SEO() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 overflow-hidden dark:from-green-600 dark:via-emerald-600 dark:to-teal-600">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-400/20 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
@@ -95,10 +95,10 @@ export default function SEO() {
               <span className="text-white font-semibold">SEO Services</span>
             </div>
             
-            <h1 className="text-4xl lg:text-6xl font-poppins font-bold text-white mb-6">
+            <h1 className="text-4xl lg:text-6xl font-poppins font-bold text-white dark:text-white mb-6">
               Search Engine <span className="bg-gradient-to-r from-emerald-400 to-white bg-clip-text text-transparent">Optimization</span>
             </h1>
-            <p className="text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed mb-8">
+            <p className="text-xl lg:text-2xl text-gray-200 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed mb-8">
               Improve your website visibility and drive organic traffic with our comprehensive SEO services that boost your search engine rankings.
             </p>
             

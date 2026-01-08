@@ -77,7 +77,7 @@ export default function DataAnalytics() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-600 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-600 overflow-hidden dark:from-indigo-600 dark:via-blue-600 dark:to-cyan-600">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
@@ -95,10 +95,10 @@ export default function DataAnalytics() {
               <span className="text-white font-semibold">Data & Analytics</span>
             </div>
             
-            <h1 className="text-4xl lg:text-6xl font-poppins font-bold text-white mb-6">
+            <h1 className="text-4xl lg:text-6xl font-poppins font-bold text-white dark:text-white mb-6">
               Advanced <span className="bg-gradient-to-r from-cyan-400 to-white bg-clip-text text-transparent">Data & Analytics</span>
             </h1>
-            <p className="text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed mb-8">
+            <p className="text-xl lg:text-2xl text-gray-200 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed mb-8">
               Transform your data into actionable insights with our comprehensive data solutions. 
               From SQL databases to ETL processes, we help you make data-driven decisions.
             </p>

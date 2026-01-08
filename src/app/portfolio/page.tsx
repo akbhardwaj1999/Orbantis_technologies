@@ -85,7 +85,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-navy via-navy to-primary-600 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-navy via-navy to-primary-600 overflow-hidden dark:from-navy dark:via-navy dark:to-primary-600">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-aqua/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
@@ -98,10 +98,10 @@ export default function Portfolio() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-4xl lg:text-6xl font-poppins font-bold text-white mb-6">
+            <h1 className="text-4xl lg:text-6xl font-poppins font-bold text-white dark:text-white mb-6">
               Our <span className="bg-gradient-to-r from-aqua to-primary-400 bg-clip-text text-transparent">Portfolio</span>
             </h1>
-            <p className="text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl lg:text-2xl text-gray-200 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed">
               Discover our latest work and see how we've helped businesses transform 
               their digital presence with innovative solutions.
             </p>
@@ -388,7 +388,7 @@ export default function Portfolio() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-navy to-primary-600">
+      <section className="py-20 bg-gradient-to-r from-navy to-primary-600 dark:from-navy dark:to-primary-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -396,10 +396,10 @@ export default function Portfolio() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl lg:text-5xl font-poppins font-bold text-white mb-6">
+            <h2 className="text-4xl lg:text-5xl font-poppins font-bold text-white dark:text-white mb-6">
               Ready to Start Your <span className="bg-gradient-to-r from-aqua to-primary-400 bg-clip-text text-transparent">Project?</span>
             </h2>
-            <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-200 dark:text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
               Let's discuss your project and create something amazing together. 
               Get your free consultation today.
             </p>
@@ -412,7 +412,7 @@ export default function Portfolio() {
               </Link>
               <Link
                 href="/services"
-                className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-navy transition-all duration-300"
+                className="border-2 border-white text-white dark:text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-navy transition-all duration-300"
               >
                 View Our Services
               </Link>

@@ -167,7 +167,7 @@ export default function Services() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-navy via-navy to-primary-600 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-navy via-navy to-primary-600 overflow-hidden dark:from-navy dark:via-navy dark:to-primary-600">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-aqua/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
@@ -180,10 +180,10 @@ export default function Services() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="heading-title text-white mb-6">
+            <h1 className="heading-title text-white dark:text-white mb-6">
               Our <span className="bg-gradient-to-r from-aqua to-primary-400 bg-clip-text text-transparent">Services</span>
             </h1>
-            <p className="text-xl lg:text-2xl text-gray-200 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl lg:text-2xl text-gray-200 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed">
               Comprehensive digital solutions to transform your business. From web development 
               to AI automation, we've got you covered with cutting-edge technology.
             </p>
