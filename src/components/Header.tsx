@@ -56,9 +56,9 @@ const Header = () => {
           <Link href="/" className="flex items-center space-x-2">
             <div className="flex items-center justify-center">
               <img
-                src="/logo.png"
+                src="/logo2.png"
                 alt="Orbantis Logo"
-                className="h-10 object-contain rounded-lg"
+                className="h-[5.7rem] object-contain rounded-lg"
               />
             </div>
           </Link>

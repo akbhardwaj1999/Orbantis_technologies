@@ -54,9 +54,9 @@ const Footer = () => {
           >
             <div className="flex items-center space-x-2">
               <img
-                src="/logo.png"
+                src="/logo2.png"
                 alt="Orbantis Logo"
-                className="h-10 object-contain rounded-lg"
+                className="h-[5.7rem] object-contain rounded-lg"
               />
             </div>
             <p className="text-gray-600 mb-6 mt-6 leading-relaxed">

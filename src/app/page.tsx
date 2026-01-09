@@ -5,6 +5,7 @@ import WhoWeAre from '@/components/sections/WhoWeAre'
 import ServicesPreview from '@/components/sections/ServicesPreview'
 import SkillsSection from '@/components/sections/SkillsSection'
 import Testimonials from '@/components/sections/Testimonials'
+import ClientReviews from '@/components/sections/ClientReviews'
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <ServicesPreview />
       <Testimonials />
       <WhoWeAre />
+      <ClientReviews />
       <SkillsSection />
     </div>
   )

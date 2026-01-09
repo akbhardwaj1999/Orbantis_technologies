@@ -38,10 +38,14 @@ export default function Contact() {
 
       const data = await response.json()
 
+      console.log('Form submission response:', { status: response.status, data })
+
       if (!response.ok) {
+        console.error('API Error:', data)
         throw new Error(data.error || 'Failed to send message')
       }
 
+      console.log('Email sent successfully!')
       setIsSubmitted(true)
       
       // Reset form after 5 seconds
