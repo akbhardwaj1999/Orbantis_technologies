@@ -572,7 +572,7 @@ export default function About() {
                 </div>
                 <h2 className="heading-title text-white mb-6">
                   <span className="text-black">What Our </span>
-                  <span className="text-accent-blue">Customer Say</span>
+                  <span className="text-accent-blue">Customers Say</span>
                 </h2>
                 <div className="rounded-lg p-3">
                   <p className="text-white text-base lg:text-lg leading-relaxed font-poppins">

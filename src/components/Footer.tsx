@@ -29,7 +29,6 @@ const Footer = () => {
     ],
     resources: [
       { name: 'Blog', href: '/blog' },
-      { name: 'Case Study', href: '/case-study' },
       { name: 'Privacy Policy', href: '/privacy' },
       { name: 'Terms of Service', href: '/terms' },
     ],
@@ -184,9 +183,6 @@ const Footer = () => {
               © {currentYear} Orbantis Technologies. All rights reserved.
             </p>
             <div className="flex flex-wrap gap-4 justify-center md:justify-end">
-              <Link href="/case-study" className="text-gray-600 hover:text-accent-blue text-sm transition-colors">
-                Case Study
-              </Link>
               <Link href="/privacy" className="text-gray-600 hover:text-accent-blue text-sm transition-colors">
                 Privacy Policy
               </Link>

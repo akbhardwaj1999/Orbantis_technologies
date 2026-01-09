@@ -192,13 +192,13 @@ const ClientReviews = () => {
   const clientReviews = [
     {
       name: 'Steven Guevara',
-      image: '/client1.jpg',
+      image: '/steven.jpg',
       review: 'The entire experience was smooth and well-organized. Requirements were understood clearly, communication was excellent, and the final delivery met all expectations. The quality of work and attention to detail were truly impressive.',
       rating: 5
     },
     {
       name: 'Johnny Linden',
-      image: '/client2.jpg',
+      image: '/johny.jpg',
       review: 'Outstanding work from start to finish. The team showed strong technical skills, a proactive approach, and great reliability throughout the project. Everything was delivered on time with excellent results.',
       rating: 5
     },
@@ -249,7 +249,7 @@ const ClientReviews = () => {
               </div>
               <h2 className="heading-title text-white mb-6">
                 <span className="text-black">What Our </span>
-                <span className="text-accent-blue">Customer Say</span>
+                <span className="text-accent-blue">Customers Say</span>
               </h2>
               <div className="rounded-lg p-3">
                 <p className="text-white text-base lg:text-lg leading-relaxed font-poppins">

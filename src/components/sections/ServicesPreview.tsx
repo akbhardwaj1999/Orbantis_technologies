@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
-import { Code, Smartphone, Brain, Palette, Database, Shield, ArrowRight, Sparkles, CheckCircle, Clock, Globe } from 'lucide-react'
+import { Code, Smartphone, Brain, Palette, Database, Shield, ArrowRight, Sparkles, CheckCircle, Clock, Globe, Server, Image, Search } from 'lucide-react'
 import { useRef, useState } from 'react'
 import CountUp from '@/components/CountUp'
 
@@ -59,6 +59,27 @@ const ServicesPreview = () => {
       description: 'Comprehensive testing solutions including automated and manual testing.',
       image: '/service_05.png',
       href: '/services/testing-qa'
+    },
+    {
+      icon: Server,
+      title: 'Backend Development',
+      description: 'Robust and scalable backend solutions to power your applications with optimal performance.',
+      image: '/backend.png',
+      href: '/services/backend-development'
+    },
+    {
+      icon: Image,
+      title: 'Graphic Design',
+      description: 'Creative and compelling visual designs that capture your brand essence and engage your audience.',
+      image: '/graphic.png',
+      href: '/services/graphic-design'
+    },
+    {
+      icon: Search,
+      title: 'SEO',
+      description: 'Boost your online visibility and drive organic traffic with our comprehensive SEO strategies.',
+      image: '/seo.png',
+      href: '/services/seo'
     }
   ]
 
@@ -112,7 +133,7 @@ const ServicesPreview = () => {
           </motion.div>
 
         {/* Services Grid - White Cards with Icons */}
-            <div className="py-2">
+            <div className="pt-2 pb-12">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   {services.map((service, index) => (
@@ -126,19 +147,21 @@ const ServicesPreview = () => {
                     >
                       {/* Icon */}
                       <div className="mb-4 flex justify-center">
-                        <div className="w-16 h-16 flex items-center justify-center">
+                        <div className={`${service.title === 'Backend Development' || service.title === 'Graphic Design' || service.title === 'SEO' ? 'w-24 h-24' : 'w-16 h-16'} flex items-center justify-center`}>
                           <img
                             src={service.image}
                             alt={service.title}
-                            className="w-full h-full object-contain"
+                            className="w-full h-full object-contain max-w-full max-h-full"
+                            style={service.title === 'Backend Development' || service.title === 'Graphic Design' || service.title === 'SEO' ? { minWidth: '80px', minHeight: '80px' } : {}}
                             onError={(e) => {
                               // Fallback to icon if image doesn't exist
                               e.currentTarget.style.display = 'none'
                               const parent = e.currentTarget.parentElement
+                              const isLargeIcon = service.title === 'Backend Development' || service.title === 'Graphic Design' || service.title === 'SEO'
                               if (parent) {
                                 parent.innerHTML = `
-                                  <div class="w-20 h-20 bg-accent-blue/10 rounded-xl flex items-center justify-center">
-                                    <svg class="w-12 h-12 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <div class="${isLargeIcon ? 'w-24 h-24' : 'w-16 h-16'} bg-accent-blue/10 rounded-xl flex items-center justify-center">
+                                    <svg class="${isLargeIcon ? 'w-16 h-16' : 'w-12 h-12'} text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                   </div>
@@ -150,7 +173,7 @@ const ServicesPreview = () => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-lg font-bold text-gray-900 mb-3">
+                      <h3 className="text-lg font-bold text-gray-900 mb-3 text-center">
                         {service.title}
                       </h3>
 
@@ -171,13 +194,15 @@ const ServicesPreview = () => {
                       </p>
 
                       {/* Learn More Link */}
-                      <Link
-                        href={service.href}
-                        className="inline-flex items-center text-accent-blue font-semibold text-sm lg:text-base hover:text-accent-cyan transition-colors group/link"
-                      >
-                        Learn More
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-2 transition-transform" />
-                      </Link>
+                      <div className="flex justify-center">
+                        <Link
+                          href={service.href}
+                          className="inline-flex items-center text-accent-blue font-semibold text-sm lg:text-base hover:text-accent-cyan transition-colors group/link"
+                        >
+                          Learn More
+                          <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-2 transition-transform" />
+                        </Link>
+                      </div>
                     </motion.div>
                   ))}
                 </div>

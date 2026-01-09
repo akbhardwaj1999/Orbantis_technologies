@@ -3,14 +3,37 @@ import nodemailer from 'nodemailer'
 
 export const runtime = 'nodejs'
 
-// Create transporter using Gmail SMTP
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER, // Your Gmail address
-    pass: process.env.GMAIL_APP_PASSWORD, // Gmail App Password (not regular password)
-  },
-})
+// Create transporter - supports both Gmail and Microsoft/Outlook
+const getTransporter = () => {
+  // Check if using Microsoft/Outlook account
+  if (process.env.MAIL_USER && process.env.MAIL_PASS) {
+    return nodemailer.createTransport({
+      host: 'smtp-mail.outlook.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
+      tls: {
+        ciphers: 'SSLv3'
+      }
+    })
+  }
+  
+  // Default to Gmail if Gmail credentials are provided
+  if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
+    })
+  }
+  
+  return null
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,9 +55,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    const transporter = getTransporter()
+    
+    if (!transporter) {
       return NextResponse.json(
-        { error: 'Email service not configured. Please set GMAIL_USER and GMAIL_APP_PASSWORD in .env.local file.' },
+        { error: 'Email service not configured. Please set either:\n1. MAIL_USER and MAIL_PASS for Microsoft/Outlook accounts\n2. GMAIL_USER and GMAIL_APP_PASSWORD for Gmail accounts\n\nAdd these to your .env.local file.' },
         { status: 500 }
       )
     }
@@ -50,7 +75,7 @@ export async function POST(request: NextRequest) {
       from: fromEmail,
       to: recipientEmail,
       replyTo: email,
-      hasGmailConfig: !!(process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD)
+      hasMailConfig: !!(process.env.MAIL_USER || process.env.GMAIL_USER)
     })
 
     // Send main email to company - THIS IS CRITICAL, MUST SUCCEED
@@ -154,7 +179,7 @@ export async function POST(request: NextRequest) {
     // Send confirmation email to customer
     try {
       await transporter.sendMail({
-        from: `Orbantis Technologies <${process.env.GMAIL_USER}>`, // Use Gmail account as from
+        from: `Orbantis Technologies <${process.env.MAIL_USER || process.env.GMAIL_USER}>`, // Use configured email account as from
         to: email,
         subject: 'Thank you for contacting Orbantis Technologies!',
         html: `
