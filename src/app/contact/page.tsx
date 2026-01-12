@@ -47,10 +47,12 @@ export default function Contact() {
 
       console.log('Email sent successfully!')
       setIsSubmitted(true)
+      setIsSubmitting(false) // Reset submitting state
       
       // Reset form after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false)
+        setIsSubmitting(false) // Ensure submitting state is reset
         setFormData({
           name: '',
           email: '',

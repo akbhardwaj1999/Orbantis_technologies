@@ -3,9 +3,20 @@ import nodemailer from 'nodemailer'
 
 export const runtime = 'nodejs'
 
-// Create transporter - supports both Gmail and Microsoft/Outlook
+// Create transporter - Gmail SMTP
 const getTransporter = () => {
-  // Check if using Microsoft/Outlook account
+  // Use Gmail if Gmail credentials are provided
+  if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+      },
+    })
+  }
+  
+  // Fallback to Microsoft/Outlook if Gmail not configured
   if (process.env.MAIL_USER && process.env.MAIL_PASS) {
     return nodemailer.createTransport({
       host: 'smtp-mail.outlook.com',
@@ -18,17 +29,6 @@ const getTransporter = () => {
       tls: {
         ciphers: 'SSLv3'
       }
-    })
-  }
-  
-  // Default to Gmail if Gmail credentials are provided
-  if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
-    return nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-      },
     })
   }
   
@@ -59,32 +59,37 @@ export async function POST(request: NextRequest) {
     
     if (!transporter) {
       return NextResponse.json(
-        { error: 'Email service not configured. Please set either:\n1. MAIL_USER and MAIL_PASS for Microsoft/Outlook accounts\n2. GMAIL_USER and GMAIL_APP_PASSWORD for Gmail accounts\n\nAdd these to your .env.local file.' },
+        { error: 'Email service not configured. Please set GMAIL_USER and GMAIL_APP_PASSWORD in .env.local file for Gmail accounts.' },
         { status: 500 }
       )
     }
 
-    // Recipient email - always send to astha@orbantistechnologies.com
-    const recipientEmail = 'astha@orbantistechnologies.com'
+    // Recipient emails
+    const recipientEmail = 'gaastha392@gmail.com'
+    const ccEmail = 'astha@orbantistechnologies.com'
     
     // Use form email as "from" address
     const fromEmail = email
+    // Gmail account for authentication (but we'll try to use form email as from)
+    const senderEmail = process.env.GMAIL_USER || process.env.MAIL_USER || 'gaastha392@gmail.com'
 
-    // Send email to company
+    // Send email
     console.log('Attempting to send email:', {
       from: fromEmail,
       to: recipientEmail,
+      cc: ccEmail,
       replyTo: email,
-      hasMailConfig: !!(process.env.MAIL_USER || process.env.GMAIL_USER)
+      hasGmailConfig: !!process.env.GMAIL_USER
     })
 
-    // Send main email to company - THIS IS CRITICAL, MUST SUCCEED
+    // Send main email to gaastha392@gmail.com with CC to astha@orbantistechnologies.com
     try {
-      console.log('📧 Sending main email to company...', { to: recipientEmail, from: fromEmail })
+      console.log('📧 Sending email...', { to: recipientEmail, cc: ccEmail, from: fromEmail })
       
       const mainEmailResult = await transporter.sendMail({
-        from: `${name} <${fromEmail}>`, // Form email as from
-        to: recipientEmail,
+        from: `${name} <${fromEmail}>`, // Use form email as from address
+        to: recipientEmail, // gaastha392@gmail.com
+        cc: ccEmail, // CC to astha@orbantistechnologies.com
         replyTo: email, // User's email from form - replies will go directly to user
         subject: `New Contact Form Submission from ${name}`,
       html: `
@@ -158,14 +163,17 @@ export async function POST(request: NextRequest) {
       `,
       })
       
-      console.log('✅ Main email sent successfully!', {
+      console.log('✅ Email sent successfully!', {
         to: recipientEmail,
+        cc: ccEmail,
         from: fromEmail,
+        replyTo: email,
         messageId: mainEmailResult.messageId
       })
     } catch (sendError: any) {
-      console.error('❌ CRITICAL: Main email failed to send!', {
+      console.error('❌ CRITICAL: Email failed to send!', {
         to: recipientEmail,
+        cc: ccEmail,
         error: sendError.message,
         code: sendError.code,
         status: sendError.status,
@@ -176,11 +184,15 @@ export async function POST(request: NextRequest) {
       throw new Error(`Failed to send email to ${recipientEmail}: ${sendError.message || 'Unknown error'}`)
     }
 
-    // Send confirmation email to customer
+    // Send confirmation email to customer from astha@orbantistechnologies.com
+    // Note: Gmail requires authenticated account as from, so we use Gmail account but show Orbantis Technologies
     try {
+      console.log('📧 Sending confirmation email to customer...', { to: email })
+      
       await transporter.sendMail({
-        from: `Orbantis Technologies <${process.env.MAIL_USER || process.env.GMAIL_USER}>`, // Use configured email account as from
-        to: email,
+        from: `Orbantis Technologies <${senderEmail}>`, // Use Gmail account but show as Orbantis Technologies
+        replyTo: 'astha@orbantistechnologies.com', // Replies will go to astha@orbantistechnologies.com
+        to: email, // User's email from form
         subject: 'Thank you for contacting Orbantis Technologies!',
         html: `
           <!DOCTYPE html>
@@ -210,7 +222,7 @@ export async function POST(request: NextRequest) {
                           Thank you for reaching out to Orbantis Technologies! We have successfully received your message and our team will review it shortly.
                         </p>
                         <p style="color: #333; font-size: 16px; line-height: 1.8; margin: 0 0 30px 0;">
-                          We typically respond within <strong style="color: #0066cc;">24 hours</strong> during business days. If your inquiry is urgent, please feel free to call us directly.
+                          We will respond to your inquiry within <strong style="color: #0066cc;">24 hours</strong> or sooner. Our team is committed to providing you with the best service and addressing all your questions promptly.
                         </p>
                         <div style="background-color: #f8fafc; border-left: 4px solid #0066cc; padding: 20px; border-radius: 5px; margin-bottom: 30px;">
                           <h3 style="color: #0066cc; margin: 0 0 15px 0; font-size: 18px; font-weight: 600;">Your Message:</h3>
@@ -246,9 +258,17 @@ export async function POST(request: NextRequest) {
           </html>
         `,
       })
+      console.log('✅ Confirmation email sent successfully!', {
+        to: email,
+        from: 'astha@orbantistechnologies.com'
+      })
     } catch (confirmationError: any) {
       // Continue - main email was sent successfully
-      console.error('Confirmation email error:', confirmationError)
+      console.error('❌ Confirmation email failed to send!', {
+        to: email,
+        error: confirmationError.message,
+        fullError: JSON.stringify(confirmationError, null, 2)
+      })
     }
 
     return NextResponse.json(
