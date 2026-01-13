@@ -22,28 +22,28 @@ const Testimonials = () => {
 
       {/* Content wrapper */}
       <div className="relative z-10 flex-1 flex flex-col justify-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8">
           {/* Section Header - Centered */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: false }}
-            className="text-center mb-8"
+            className="text-center mb-6 sm:mb-8"
           >
             <motion.h2 
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               viewport={{ once: false }}
-              className="heading-title text-gray-900 mb-3"
+              className="heading-title text-gray-900 mb-2 sm:mb-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
             >
               Reasons Businesses <span className="bg-gradient-to-r from-aqua to-primary-400 bg-clip-text">Trust Us</span>
             </motion.h2>
           </motion.div>
 
           {/* Features Grid - All cards same height */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-6 sm:mb-8">
             {[
               {
                 title: 'High-Quality Solutions',
@@ -82,17 +82,16 @@ const Testimonials = () => {
                 <motion.div
                   whileHover={{ y: -5, scale: 1.02 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-white/95 backdrop-blur-lg border border-white/30 rounded-2xl p-6 shadow-2xl hover:shadow-3xl transition-all duration-300 h-full flex flex-col"
+                  className="bg-white/95 backdrop-blur-lg border border-white/30 rounded-2xl p-4 sm:p-5 md:p-6 shadow-2xl hover:shadow-3xl transition-all duration-300 h-full flex flex-col"
                 >
-                  <div className="text-4xl mb-4">{feature.icon}</div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{feature.icon}</div>
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 sm:mb-3">
                     {feature.title}
                   </h3>
                   <p 
-                    className="flex-grow"
+                    className="flex-grow text-sm sm:text-base md:text-lg"
                     style={{
                       textAlign: 'left',
-                      fontSize: '18px',
                       lineHeight: '1.44',
                       fontWeight: 400,
                       marginTop: '12px',

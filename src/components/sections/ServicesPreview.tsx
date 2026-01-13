@@ -112,20 +112,20 @@ const ServicesPreview = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: false }}
-            className="text-center px-2 sm:px-6 lg:px-8 py-10"
+            className="text-center px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-10"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-poppins font-bold text-gray-900 mb-4 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-poppins font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
               Our Services
             </h2>
-            <p className="max-w-3xl mx-auto text-center text-base sm:text-lg text-gray-700 font-poppins px-4">
+            <p className="max-w-3xl mx-auto text-center text-sm sm:text-base md:text-lg text-gray-700 font-poppins px-2 sm:px-4">
               Transform Your Business
             </p>
           </motion.div>
 
         {/* Services Grid - White Cards with Icons */}
-            <div className="pt-2 pb-12">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="pt-2 pb-8 sm:pb-12">
+              <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                   {services.map((service, index) => (
                     <motion.div
                       key={service.title}
@@ -136,13 +136,13 @@ const ServicesPreview = () => {
                       className="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-xl p-4 sm:p-5 hover:shadow-lg transition-all duration-300 group"
                     >
                       {/* Icon */}
-                      <div className="mb-4 flex justify-center">
-                        <div className={`${service.title === 'Backend Development' || service.title === 'Graphic Design' || service.title === 'SEO' ? 'w-24 h-24' : 'w-16 h-16'} flex items-center justify-center`}>
+                      <div className="mb-3 sm:mb-4 flex justify-center">
+                        <div className={`${service.title === 'Backend Development' || service.title === 'Graphic Design' || service.title === 'SEO' ? 'w-20 h-20 sm:w-24 sm:h-24' : 'w-14 h-14 sm:w-16 sm:h-16'} flex items-center justify-center`}>
                           <img
                             src={service.image}
                             alt={service.title}
                             className="w-full h-full object-contain max-w-full max-h-full"
-                            style={service.title === 'Backend Development' || service.title === 'Graphic Design' || service.title === 'SEO' ? { minWidth: '80px', minHeight: '80px' } : {}}
+                            style={service.title === 'Backend Development' || service.title === 'Graphic Design' || service.title === 'SEO' ? { minWidth: '60px', minHeight: '60px' } : {}}
                             onError={(e) => {
                               // Fallback to icon if image doesn't exist
                               e.currentTarget.style.display = 'none'
@@ -150,8 +150,8 @@ const ServicesPreview = () => {
                               const isLargeIcon = service.title === 'Backend Development' || service.title === 'Graphic Design' || service.title === 'SEO'
                               if (parent) {
                                 parent.innerHTML = `
-                                  <div class="${isLargeIcon ? 'w-24 h-24' : 'w-16 h-16'} bg-accent-blue/10 rounded-xl flex items-center justify-center">
-                                    <svg class="${isLargeIcon ? 'w-16 h-16' : 'w-12 h-12'} text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <div class="${isLargeIcon ? 'w-20 h-20 sm:w-24 sm:h-24' : 'w-14 h-14 sm:w-16 sm:h-16'} bg-accent-blue/10 rounded-xl flex items-center justify-center">
+                                    <svg class="${isLargeIcon ? 'w-12 h-12 sm:w-16 sm:h-16' : 'w-10 h-10 sm:w-12 sm:h-12'} text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                   </div>
@@ -163,24 +163,24 @@ const ServicesPreview = () => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 sm:mb-3 text-center">
+                      <h3 className="text-sm sm:text-base md:text-lg font-bold text-gray-900 mb-2 sm:mb-3 text-center">
                         {service.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="mb-4 sm:mb-6 text-sm sm:text-base text-left leading-relaxed text-gray-700 font-poppins">
+                      <p className="mb-3 sm:mb-4 md:mb-6 text-xs sm:text-sm md:text-base text-left leading-relaxed text-gray-700 font-poppins">
                         {service.description}
                       </p>
 
                       {/* Learn More Link */}
                       <div className="flex justify-center">
-                        <Link
-                          href={service.href}
-                          className="inline-flex items-center text-accent-blue font-semibold text-sm lg:text-base hover:text-accent-cyan transition-colors group/link"
-                        >
-                          Learn More
-                          <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-2 transition-transform" />
-                        </Link>
+                      <Link
+                        href={service.href}
+                        className="inline-flex items-center text-accent-blue font-semibold text-xs sm:text-sm md:text-base hover:text-accent-cyan transition-colors group/link"
+                      >
+                        Learn More
+                        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2 group-hover/link:translate-x-2 transition-transform" />
+                      </Link>
                       </div>
                     </motion.div>
                   ))}
@@ -191,21 +191,21 @@ const ServicesPreview = () => {
     </section>
 
       {/* Stats Section - Image Left, Stats Right */}
-      <section className="relative bg-white py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <section className="relative bg-white py-12 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             {/* Left Side - Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: false }}
-              className="flex items-center justify-center"
+              className="flex items-center justify-center order-2 lg:order-1"
             >
               <img
                 src="/hst-05.png"
                 alt="Stats Illustration"
-                className="w-full max-w-md h-auto object-contain"
+                className="w-full max-w-[280px] sm:max-w-sm md:max-w-md h-auto object-contain"
                 onError={(e) => {
                   // Fallback if image doesn't exist
                   e.currentTarget.style.display = 'none'
@@ -236,23 +236,23 @@ const ServicesPreview = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: false }}
+              className="order-1 lg:order-2"
             >
               <div className="mb-2">
-                <span className="text-xs font-semibold uppercase tracking-wider text-accent-blue">
+                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-accent-blue">
                   INSIGHT
                 </span>
               </div>
               
-              <h2 className="heading-title">
+              <h2 className="heading-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                 Unlocking<br />
                 Competitive Edge
               </h2>
               
               <p 
-                className="mb-8"
+                className="mb-6 sm:mb-8 text-sm sm:text-base md:text-lg"
                 style={{
                   textAlign: 'left',
-                  fontSize: '18px',
                   lineHeight: '1.44',
                   fontWeight: 400,
                   marginTop: '12px',
@@ -264,17 +264,17 @@ const ServicesPreview = () => {
               </p>
 
               {/* Statistics Grid - 2 Columns */}
-              <div className="grid grid-cols-2 gap-6 lg:gap-8 mb-8">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   viewport={{ once: false }}
                 >
-                  <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
                     <span>10+</span>
                   </div>
-                  <div className="text-sm text-gray-700">Projects Completed</div>
+                  <div className="text-xs sm:text-sm text-gray-700">Projects Completed</div>
                 </motion.div>
 
                 <motion.div
@@ -283,11 +283,11 @@ const ServicesPreview = () => {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: false }}
                 >
-                  <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
                     <CountUp end="100" className="inline" />
                     <span className="text-accent-blue">%</span>
                   </div>
-                  <div className="text-sm text-gray-700">Dedication</div>
+                  <div className="text-xs sm:text-sm text-gray-700">Dedication</div>
                 </motion.div>
 
                 <motion.div
@@ -296,10 +296,10 @@ const ServicesPreview = () => {
                   transition={{ duration: 0.6, delay: 0.5 }}
                   viewport={{ once: false }}
                 >
-                  <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
                     <CountUp end="24" className="inline" />/<CountUp end="7" className="inline" />
                   </div>
-                  <div className="text-sm text-gray-700">Support Available</div>
+                  <div className="text-xs sm:text-sm text-gray-700">Support Available</div>
                 </motion.div>
 
                 <motion.div
@@ -308,10 +308,10 @@ const ServicesPreview = () => {
                   transition={{ duration: 0.6, delay: 0.6 }}
                   viewport={{ once: false }}
                 >
-                  <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
                     <span>∞</span>
                   </div>
-                  <div className="text-sm text-gray-700">Potential</div>
+                  <div className="text-xs sm:text-sm text-gray-700">Potential</div>
                 </motion.div>
               </div>
 
@@ -324,10 +324,10 @@ const ServicesPreview = () => {
               >
                 <Link
                   href="/contact"
-                  className="inline-flex items-center bg-accent-blue text-white px-6 py-3 rounded-lg font-semibold text-sm hover:bg-accent-blue-bright transition-all duration-300 group"
+                  className="inline-flex items-center bg-accent-blue text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-xs sm:text-sm hover:bg-accent-blue-bright transition-all duration-300 group"
                 >
                   Get in touch
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
             </motion.div>

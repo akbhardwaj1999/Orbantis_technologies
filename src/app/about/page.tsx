@@ -368,7 +368,7 @@ export default function About() {
 
       {/* Content Sections */}
       <section className="relative py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-light-200 via-white to-light-200 overflow-hidden">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     {/* ================= Section 1 ================= */}
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center mb-12 sm:mb-16 lg:mb-20">
@@ -465,14 +465,14 @@ export default function About() {
       </motion.div>
 
       {/* Right Image */}
-      <motion.div
+          <motion.div
         initial={{ opacity: 0, x: 60 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ once: true }}
-        className="flex items-center justify-center"
-      >
-        <img
+            viewport={{ once: true }}
+            className="flex items-center justify-center"
+          >
+            <img
           src="/professional.png"
           alt="Professional Strengths"
           className="w-full max-w-xs sm:max-w-md rounded-lg object-contain mx-auto"
@@ -496,8 +496,8 @@ export default function About() {
           src="/dive.png"
           alt="Innovation Dive"
           className="w-full max-w-xs sm:max-w-md rounded-lg object-contain mx-auto"
-        />
-      </motion.div>
+            />
+          </motion.div>
 
       {/* Right Content */}
       <motion.div

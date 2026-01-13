@@ -9,14 +9,14 @@ function TestimonialCard({ review, index }: { review: { name: string; image: str
   const [imageError, setImageError] = useState(false)
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg flex flex-col w-full h-full" style={{ minHeight: '280px' }}>
+    <div className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg flex flex-col w-full h-full" style={{ minHeight: '260px' }}>
       {/* Client Image with Arch */}
-      <div className="w-full h-40 overflow-hidden bg-gradient-to-br from-accent-blue to-accent-cyan relative flex items-center justify-center">
+      <div className="w-full h-32 sm:h-36 md:h-40 overflow-hidden bg-gradient-to-br from-accent-blue to-accent-cyan relative flex items-center justify-center">
         {/* Arch shape at bottom */}
         <div 
           className="absolute bottom-0 left-0 right-0 bg-white z-10"
           style={{ 
-            height: '24px',
+            height: '20px',
             clipPath: 'ellipse(100% 200% at 50% 0%)',
             transform: 'translateY(50%)'
           }}
@@ -34,7 +34,7 @@ function TestimonialCard({ review, index }: { review: { name: string; image: str
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-accent-blue to-accent-cyan">
-            <span className="text-white font-bold text-4xl">
+            <span className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">
               {review.name.charAt(0)}
             </span>
           </div>
@@ -42,16 +42,16 @@ function TestimonialCard({ review, index }: { review: { name: string; image: str
       </div>
     
       {/* Card Content */}
-      <div className="p-4 sm:p-5 lg:p-6 flex-1 flex flex-col">
-        <h3 className="text-sm sm:text-base font-semibold text-gray-900 font-poppins mb-1.5">
+      <div className="p-3 sm:p-4 md:p-5 lg:p-6 flex-1 flex flex-col">
+        <h3 className="text-xs sm:text-sm md:text-base font-semibold text-gray-900 font-poppins mb-1 sm:mb-1.5">
           {review.name}
         </h3>
-        <div className="flex items-center space-x-1 mb-2">
+        <div className="flex items-center space-x-0.5 sm:space-x-1 mb-1.5 sm:mb-2">
           {[...Array(review.rating)].map((_, i) => (
-            <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 fill-current" />
+            <Star key={i} className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 text-yellow-400 fill-current" />
           ))}
         </div>
-        <p className="text-gray-700 leading-relaxed font-poppins flex-1 text-xs sm:text-sm">
+        <p className="text-gray-700 leading-relaxed font-poppins flex-1 text-[11px] sm:text-xs md:text-sm">
           "{review.review}"
         </p>
       </div>
@@ -144,24 +144,24 @@ function TestimonialCarousel({ reviews }: { reviews: { name: string; image: stri
 
       {/* Navigation Arrows */}
       {reviews.length > cardsPerView && totalSlides > 1 && (
-        <div className="flex items-center justify-center gap-3 mt-8">
+        <div className="flex items-center justify-center gap-2 sm:gap-3 mt-6 sm:mt-8">
           <motion.button
             onClick={goToPrevious}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="w-12 h-12 bg-accent-blue hover:bg-accent-blue-bright rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="w-10 h-10 sm:w-12 sm:h-12 bg-accent-blue hover:bg-accent-blue-bright rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl"
             aria-label="Previous testimonials"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </motion.button>
           <motion.button
             onClick={goToNext}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="w-12 h-12 bg-accent-blue hover:bg-accent-blue-bright rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="w-10 h-10 sm:w-12 sm:h-12 bg-accent-blue hover:bg-accent-blue-bright rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl"
             aria-label="Next testimonials"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </motion.button>
         </div>
       )}
@@ -218,7 +218,7 @@ const ClientReviews = () => {
   ]
 
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative py-12 sm:py-16 md:py-20 overflow-hidden">
       {/* Background - Light theme on top */}
       <div className="absolute inset-0 bg-gradient-to-br from-light-200 via-white to-light-200 z-0"></div>
       
@@ -227,15 +227,15 @@ const ClientReviews = () => {
         clipPath: 'polygon(0 46%, 100% 56%, 100% 100%, 0 100%)',
       }}>
         {/* Arch effect at top of blue section */}
-        <div className="absolute top-0 left-0 right-0 h-20 overflow-hidden">
-          <div className="absolute -top-10 left-0 right-0 h-20 bg-gradient-to-r from-accent-blue via-accent-cyan to-accent-blue" style={{
+        <div className="absolute top-0 left-0 right-0 h-16 sm:h-20 overflow-hidden">
+          <div className="absolute -top-8 sm:-top-10 left-0 right-0 h-16 sm:h-20 bg-gradient-to-r from-accent-blue via-accent-cyan to-accent-blue" style={{
             borderRadius: '0 0 50% 50%'
           }}></div>
         </div>
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 items-start">
+      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8 md:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8 items-start">
           {/* Left Side - Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -244,16 +244,16 @@ const ClientReviews = () => {
             viewport={{ once: true }}
             className="relative z-30 lg:col-span-2"
           >
-            <div className="mb-6 sm:mb-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 sm:mb-6">
-                <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+            <div className="mb-4 sm:mb-6 md:mb-8">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white/20 rounded-full flex items-center justify-center mb-3 sm:mb-4 md:mb-6">
+                <Quote className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white" />
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-poppins font-bold text-white mb-4 sm:mb-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-poppins font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
                 <span className="text-black">What Our </span>
                 <span className="text-accent-blue">Customers Say</span>
               </h2>
-              <div className="rounded-lg p-3">
-                <p className="text-white text-sm sm:text-base lg:text-lg leading-relaxed font-poppins">
+              <div className="rounded-lg p-2 sm:p-3">
+                <p className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed font-poppins">
                   Our clients' success stories reflect our commitment to excellence and innovation. We take pride in building lasting partnerships that drive real results.
                 </p>
               </div>
@@ -261,7 +261,7 @@ const ClientReviews = () => {
           </motion.div>
 
           {/* Right Side - Testimonial Carousel */}
-          <div className="relative z-30 lg:col-span-3 w-full mt-6 lg:mt-0">
+          <div className="relative z-30 lg:col-span-3 w-full mt-4 sm:mt-6 lg:mt-0">
             <TestimonialCarousel reviews={clientReviews} />
           </div>
         </div>

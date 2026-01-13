@@ -23,7 +23,7 @@ const WhoWeAre = () => {
             </div>
             
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-poppins font-bold text-gray-900 mb-4 sm:mb-6">
-              Where ideas take shape and become reality
+            Where ideas take shape and become reality
             </h2>
             
             <p className="mb-6 sm:mb-8 text-sm sm:text-base md:text-lg text-left leading-relaxed text-gray-700 font-poppins">

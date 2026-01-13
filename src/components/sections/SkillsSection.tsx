@@ -54,28 +54,28 @@ const SkillsSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-24 bg-white relative overflow-visible"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white relative overflow-visible"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
           {/* Left Column - Skills with Progress Bars */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: false }}
-            className="lg:pr-8"
+            className="lg:pr-8 order-2 lg:order-1"
           >
-            <h2 className="text-2xl lg:text-3xl font-poppins font-bold text-gray-800 mb-8 leading-tight">
+            <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-poppins font-bold text-gray-800 mb-6 sm:mb-8 leading-tight">
               We make your brand stand out from the noise
             </h2>
             
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {skills.map((skill, index) => (
                 <div key={skill.name} className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-700 font-semibold text-base">{skill.name}</span>
-                    <span className="text-accent-blue font-bold text-base">{skill.percentage}%</span>
+                    <span className="text-gray-700 font-semibold text-sm sm:text-base">{skill.name}</span>
+                    <span className="text-accent-blue font-bold text-sm sm:text-base">{skill.percentage}%</span>
                   </div>
                   <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
                     <motion.div
@@ -100,14 +100,14 @@ const SkillsSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: false }}
-            className="relative"
+            className="relative order-1 lg:order-2"
           >
             {/* Main Image Card */}
             <div 
               ref={imageRef}
               className="relative bg-white rounded-2xl shadow-xl overflow-visible"
             >
-              <div className="relative h-[380px] lg:h-[450px] bg-gradient-to-br from-gray-100 to-gray-200 overflow-visible">
+              <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[380px] xl:h-[450px] bg-gradient-to-br from-gray-100 to-gray-200 overflow-visible">
                 {/* Meeting Image - Replace with your actual image path */}
                 <img
                   src="/meeting.jpeg"
@@ -147,30 +147,30 @@ const SkillsSection = () => {
                 {/* Overlaid Icons with Parallax Effect - Fixed positioning to prevent clipping */}
                 <motion.div
                   style={{ y: icon1Y }}
-                  className="absolute top-4 left-4 w-14 h-14 bg-accent-blue rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-white"
+                  className="absolute top-2 sm:top-4 left-2 sm:left-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-accent-blue rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-white"
                 >
-                  <PenTool className="w-7 h-7 text-white" />
+                  <PenTool className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
                 </motion.div>
 
                 <motion.div
                   style={{ y: icon2Y }}
-                  className="absolute top-4 right-4 w-14 h-14 bg-white rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-gray-200"
+                  className="absolute top-2 sm:top-4 right-2 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-gray-200"
                 >
-                  <Lightbulb className="w-7 h-7 text-accent-blue" />
+                  <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-accent-blue" />
                 </motion.div>
 
                 <motion.div
                   style={{ y: icon3Y }}
-                  className="absolute bottom-20 left-4 w-14 h-14 bg-white rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-gray-200"
+                  className="absolute bottom-12 sm:bottom-16 md:bottom-20 left-2 sm:left-4 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-gray-200"
                 >
-                  <Mouse className="w-7 h-7 text-accent-blue" />
+                  <Mouse className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-accent-blue" />
                 </motion.div>
 
                 <motion.div
                   style={{ y: icon4Y }}
-                  className="absolute bottom-4 right-6 w-14 h-14 bg-accent-blue rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-white"
+                  className="absolute bottom-2 sm:bottom-4 right-3 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-accent-blue rounded-lg shadow-lg flex items-center justify-center z-20 border-2 border-white"
                 >
-                  <ImageIcon className="w-7 h-7 text-white" />
+                  <ImageIcon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
                 </motion.div>
               </div>
               
